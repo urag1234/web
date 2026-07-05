@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Urajs Blog</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== YOUR ORIGINAL CSS (UNCHANGED) ===== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --yellow:#FFE000;
+  --black:#0A0A0A;
+  --white:#F5F5F0;
+  --gray:#171717;
+}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Space Mono', monospace;
+  overflow-x:hidden;
+}
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:70px;
+  padding:0 2rem;
+  background:var(--black);
+  border-bottom:2px solid var(--yellow);
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:'Bebas Neue', sans-serif;
+  font-size:2.4rem;
+  letter-spacing:4px;
+  text-decoration:none;
+  color:var(--yellow);
+}
+
+.nav-links{
+  display:flex;
+  gap:8px;
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--white);
+  border:1px solid #2a2a2a;
+  padding:10px 18px;
+  font-size:0.72rem;
+  letter-spacing:2px;
+  transition:0.25s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  background:var(--yellow);
+  color:var(--black);
+  border-color:var(--yellow);
+}
+
+.hero{
+  max-width:1300px;
+  margin:auto;
+  margin-top:90px;
+  display:grid;
+  grid-template-columns:1fr 480px;
+  gap:40px;
+  padding:2rem;
+}
+
+.left{
+  position:sticky;
+  top:90px;
+  height:fit-content;
+}
+
+.left h1{
+  font-family:'Bebas Neue', sans-serif;
+  font-size:clamp(6rem,12vw,12rem);
+  line-height:.85;
+  letter-spacing:10px;
+}
+
+.left span{ color:var(--yellow); }
+
+.left p{
+  color:#888;
+  font-size:.9rem;
+  line-height:1.8;
+}
+
+.blog-section{
+  background:var(--gray);
+  border:1px solid #222;
+  margin-bottom:30px;
+  overflow:hidden;
+}
+
+.blog-header{
+  background:var(--yellow);
+  color:black;
+  padding:10px 15px;
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:3px;
+}
+
+.image-wrapper{
+  position:relative;
+  width:100%;
+  height:340px;
+  overflow:hidden;
+}
+
+.blog-image,
+.blog-image-old{
+  width:100%;
+  height:340px;
+  object-fit:cover;
+}
+
+
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.28);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+transition:.3s ease;
+cursor:pointer;
+}
+
+.overlay span{
+color:#fff;
+background:rgba(0,0,0,.65);
+border:1px solid rgba(255,255,255,.85);
+padding:14px 24px;
+font-family:'Bebas Neue',sans-serif;
+font-size:1.3rem;
+letter-spacing:4px;
+box-shadow:0 0 16px rgba(255,255,255,.35);
+transform:translateY(10px);
+transition:.3s ease;
+}
+
+.image-wrapper:hover .overlay{opacity:1;}
+.image-wrapper:hover .overlay span{transform:translateY(0);}
+.image-wrapper:hover .blog-image,
+.image-wrapper:hover .blog-image-old{
+transform:scale(1.05);
+transition:.3s ease;
+}
+
+.blog-content{
+
+  padding:1.2rem;
+}
+
+.blog-date{
+  color:var(--yellow);
+  font-size:.7rem;
+  margin-bottom:.5rem;
+}
+
+.blog-location{
+  font-family:'Bebas Neue', sans-serif;
+  font-size:2rem;
+  margin-bottom:.6rem;
+}
+
+.blog-text{
+  color:#ccc;
+  font-size:.85rem;
+  line-height:1.8;
+}
+
+/* ===== VIDEO MODAL (ONLY ADDITION) ===== */
+
+.video-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.video-box{
+  width:90%;
+  max-width:420px;
+  background:black;
+  border:2px solid var(--yellow);
+  border-radius:12px;
+  padding:10px;
+  position:relative;
+}
+
+.video-box video{
+  width:100%;
+  border-radius:8px;
+}
+
+.close{
+  position:absolute;
+  top:-15px;
+  right:-15px;
+  width:32px;
+  height:32px;
+  background:black;
+  border:2px solid var(--yellow);
+  color:var(--yellow);
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  font-size:18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html" class="logo">URAJS BLOG</a>
+
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">⌂ HOME</a></li>
+    <li><a href="videos.html">▶ VIDEOS</a></li>
+    <li><a href="info.html">◉ INFO</a></li>
+    <li><a href="forum.html">☰ MEMBER FORUM</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+
+<div class="left">
+  <h1>URAJS<br><span>BLOG</span></h1>
+  <p>Stories, experiences, social work, and community support from different places across Nepal.</p>
+</div>
+
+<div>
+
+<!-- FEATURED -->
+<div class="blog-section">
+  <div class="blog-header">FEATURED BLOG</div>
+
+  <div class="image-wrapper" onclick="window.open('https://youtube.com/shorts/4w6EC0GdT8E?si=HBrcGh-xpOVox0VC','_blank')">
+    <img src="./IMG_3083.jpeg" class="blog-image">
+    <div class="overlay"><span>▶ PLAY NOW</span></div>
+  </div>
+
+  <div class="blog-content">
+    <div class="blog-date">MAY 24, 2026</div>
+    <div class="blog-location">DAMAK-5, JHAPA</div>
+    <div class="blog-text">
+      During my visit to an old age home in Damak-5, Jhapa, I helped elderly people with care, food, clothes and support.
+    </div>
+  </div>
+</div>
+
+<!-- OLDAGE4 WITH VIDEO -->
+<div class="blog-section">
+  <div class="blog-header">OLD AGE CARE</div>
+
+  <div class="image-wrapper" onclick="window.open('https://youtube.com/shorts/EpzR2ZFx86Y?feature=share','_blank')">
+    <img src="./oldage4.jpeg.jpeg" class="blog-image-old">
+
+    <div class="overlay" >
+      <span>▶ PLAY NOW</span>
+    </div>
+  </div>
+
+<!-- OLD AGE CARE -->
+<div class="blog-section">
+  <div class="blog-header">OLD AGE CARE</div>
+  <img src="./oldage1.jpeg.jpeg" class="blog-image-old">
+  <div class="blog-content">
+    <div class="blog-date">JUNE 2026 - JHAPA</div>
+    <div class="blog-text">I visited an old age home in Jhapa to celebrate a birthday and made their day special.</div>
+  </div>
+</div>
+
+<div class="blog-section">
+  <div class="blog-header">OLD AGE CARE</div>
+  <img src="./oldage2.jpeg.jpeg" class="blog-image-old">
+  <div class="blog-content">
+    <div class="blog-date">JUNE 2026 - JHAPA</div>
+    <div class="blog-text">Provided clothes to elderly people in Jhapa for comfort and support.</div>
+  </div>
+</div>
+
+<div class="blog-section">
+  <div class="blog-header">OLD AGE CARE</div>
+  <img src="./oldage3.jpeg.jpeg" class="blog-image-old">
+  <div class="blog-content">
+    <div class="blog-date">JUNE 2026 - ILAM</div>
+    <div class="blog-text">Supported old age home in Ilam with food and clothes.</div>
+  </div>
+</div>
+
+
+
+  <div class="blog-content">
+    <div class="blog-date">JUNE 2026 - ORPHANAGE</div>
+    <div class="blog-text">Distributed toys, food, and clothes to children in orphanage.</div>
+  </div>
+</div>
+
+<div class="blog-section">
+  <div class="blog-header">OLD AGE CARE</div>
+  <img src="./oldage5.jpeg.jpeg" class="blog-image-old">
+  <div class="blog-content">
+    <div class="blog-date">JUNE 2026 - ILAM</div>
+    <div class="blog-text">Provided juice and spent time with elderly people in Ilam.</div>
+  </div>
+</div>
+
+<div class="blog-section">
+  <div class="blog-header">FEATURED BLOG</div>
+  <img src="./20180130_141705.jpg" class="blog-image-old">
+  <div class="blog-content">
+    <div class="blog-date">JULY 2026 - ILAM</div>
+    <div class="blog-text">Supported old age home with assistance.</div>
+  </div>
+</div>
+
+<div class="blog-section">
+  <div class="blog-header">FEATURED BLOG</div>
+  <img src="./IMG-20201202-WA0006.jpg" class="blog-image-old">
+  <div class="blog-content">
+    <div class="blog-date">JULY 2026 - ILAM</div>
+    <div class="blog-text">Helped children at orphanage with meals and care.</div>
+  </div>
+</div>
+
+</div>
+</section>
+
+<script>
+
+</script>
+
+</body>
+</html>

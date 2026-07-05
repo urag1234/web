@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>URAJS BLOG — Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --yellow:#FFE000;
+  --black:#0A0A0A;
+  --white:#F5F5F0;
+  --gray:#161616;
+  --mid:#202020;
+}
+
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Space Mono', monospace;
+  min-height:100vh;
+  overflow-x:hidden;
+
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+/* NAVBAR */
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:70px;
+  padding:0 2rem;
+  background:var(--black);
+  border-bottom:2px solid var(--yellow);
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:'Bebas Neue', sans-serif;
+  font-size:2.4rem;
+  letter-spacing:4px;
+  text-decoration:none;
+  color:var(--yellow);
+}
+
+.nav-links{
+  display:flex;
+  gap:8px;
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--white);
+  border:1px solid #2a2a2a;
+  padding:10px 18px;
+  font-size:0.72rem;
+  letter-spacing:2px;
+  transition:0.25s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  background:var(--yellow);
+  color:var(--black);
+  border-color:var(--yellow);
+}
+
+/* PAGE */
+
+.page-wrap{
+  max-width:1100px;
+  margin:auto;
+  padding:3rem 2rem 5rem;
+}
+
+.page-tag{
+  display:inline-block;
+  background:var(--yellow);
+  color:var(--black);
+  padding:6px 14px;
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:2px;
+  margin-bottom:1rem;
+}
+
+.page-title{
+  font-family:'Bebas Neue', sans-serif;
+  font-size:clamp(4rem,9vw,7rem);
+  line-height:0.9;
+  letter-spacing:6px;
+  margin-bottom:1rem;
+}
+
+.page-sub{
+  color:#666;
+  font-size:0.72rem;
+  letter-spacing:2px;
+  margin-bottom:3rem;
+}
+
+/* PROFILE */
+
+.profile-grid{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:2px;
+  background:#1f1f1f;
+  border:1px solid #1f1f1f;
+  animation:fadeUp 0.6s ease;
+}
+
+/* AVATAR COLUMN */
+
+.avatar-col{
+  background:var(--gray);
+  padding:2rem;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  position:relative;
+  overflow:visible;
+}
+
+/* HEAVENLY GOLDEN AURA */
+
+.avatar-col::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:380px;
+  height:380px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,224,0,0.18) 0%,
+      rgba(255,224,0,0.08) 35%,
+      rgba(255,224,0,0.02) 60%,
+      transparent 75%
+    );
+
+  filter:blur(18px);
+
+  opacity:0;
+
+  transition:0.6s ease;
+
+  z-index:0;
+}
+
+/* IMAGE */
+
+.avatar-img{
+  width:320px;
+  height:320px;
+
+  border-radius:18px;
+  border:3px solid var(--yellow);
+
+  object-fit:cover;
+
+  position:relative;
+  z-index:2;
+
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease,
+    filter 0.5s ease;
+
+  box-shadow:
+    0 0 12px rgba(255,224,0,0.10),
+    0 0 30px rgba(255,224,0,0.08);
+}
+
+/* HOVER */
+
+.avatar-col:hover::before{
+
+  opacity:1;
+
+  animation:heavenGlow 4s infinite ease-in-out;
+
+}
+
+.avatar-col:hover .avatar-img{
+
+  transform:scale(1.04);
+
+  filter:
+    brightness(1.08)
+    contrast(1.02);
+
+  box-shadow:
+    0 0 20px rgba(255,224,0,0.22),
+    0 0 45px rgba(255,224,0,0.18),
+    0 0 90px rgba(255,224,0,0.12),
+    0 0 140px rgba(255,224,0,0.06);
+
+}
+
+/* LABEL */
+
+.avatar-label{
+  margin-top:1.2rem;
+  color:#777;
+  font-size:0.68rem;
+  letter-spacing:1px;
+
+  position:relative;
+  z-index:2;
+}
+
+/* INFO */
+
+.info-col{
+  background:var(--gray);
+  padding:3rem;
+}
+
+.section-label{
+  color:var(--yellow);
+  font-size:0.72rem;
+  letter-spacing:3px;
+  margin-bottom:2rem;
+}
+
+.field{
+  margin-bottom:2rem;
+}
+
+.field label{
+  display:block;
+  color:#666;
+  font-size:0.65rem;
+  letter-spacing:2px;
+  margin-bottom:0.8rem;
+}
+
+.field-box{
+  width:100%;
+  background:var(--black);
+  border:1px solid #2a2a2a;
+  padding:16px 18px;
+  color:var(--white);
+  font-size:0.92rem;
+  line-height:1.7;
+}
+
+.bio{
+  min-height:140px;
+}
+
+/* SIMPLE INFO STRIP */
+
+.stats-strip{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  background:#1f1f1f;
+  margin-top:2px;
+  animation:fadeUp 0.8s ease;
+}
+
+.stat-box{
+  background:var(--mid);
+  padding:1.5rem;
+  text-align:center;
+}
+
+.stat-title{
+  color:var(--white);
+  font-size:0.78rem;
+  letter-spacing:1px;
+  margin-bottom:0.4rem;
+}
+
+.stat-text{
+  color:#666;
+  font-size:0.65rem;
+  letter-spacing:1px;
+  line-height:1.5;
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid #1a1a1a;
+  text-align:center;
+  padding:2rem;
+  color:#333;
+  font-size:0.7rem;
+  letter-spacing:2px;
+  margin-top:4rem;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeUp{
+
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+@keyframes heavenGlow{
+
+  0%{
+    transform:scale(1);
+    opacity:0.65;
+  }
+
+  50%{
+    transform:scale(1.06);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(1);
+    opacity:0.65;
+  }
+
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+  .profile-grid{
+    grid-template-columns:1fr;
+  }
+
+  nav{
+    padding:0 1rem;
+  }
+
+  .nav-links{
+    gap:4px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+
+  .nav-links a{
+    padding:8px 10px;
+    font-size:0.58rem;
+  }
+
+  .logo{
+    font-size:1.8rem;
+  }
+
+  .avatar-img{
+    width:100%;
+    max-width:320px;
+    height:auto;
+    aspect-ratio:1/1;
+  }
+
+  .stats-strip{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+
+<nav>
+
+  <a href="index.html" class="logo">URAJS BLOG</a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">⌂ HOME</a></li>
+    <li><a href="videos.html">▶ VIDEOS</a></li>
+    <li><a href="info.html" class="active">◉ INFO</a></li>
+    <li><a href="forum.html">☰ MEMBER FORUM</a></li>
+  </ul>
+
+</nav>
+
+<!-- PAGE -->
+
+<div class="page-wrap">
+
+  <div class="page-tag">
+    PORTFOLIO
+  </div>
+
+  <div class="page-title">
+    URAJ SHRESTHA
+  </div>
+
+  <div class="page-sub">
+    PERSONAL PORTFOLIO
+  </div>
+
+  <!-- PROFILE -->
+
+  <div class="profile-grid">
+
+    <!-- LEFT -->
+
+    <div class="avatar-col">
+
+      <img
+        src="./2C394BEA-CDE8-4953-B4F0-11EC5F1554B5.png"
+        alt="Uraj Shrestha"
+        class="avatar-img"
+      >
+
+      <div class="avatar-label">
+        SOCIAL WORK & DOCUMENTARY CONTENT
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="info-col">
+
+      <div class="section-label">
+        PERSONAL DETAILS
+      </div>
+
+      <div class="field">
+
+        <label>FULL NAME</label>
+
+        <div class="field-box">
+          Uraj Shrestha
+        </div>
+
+      </div>
+
+      <div class="field">
+
+        <label>EMAIL ADDRESS</label>
+
+        <div class="field-box">
+          urajshrestha937@gmail.com
+        </div>
+
+      </div>
+
+      <div class="field">
+
+        <label>BIO</label>
+
+        <div class="field-box bio">
+          I create documentary and social content focused on travel, community activities, and public awareness. My work mainly highlights real experiences, social topics, and local stories from different places.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- INFO STRIP -->
+
+  <div class="stats-strip">
+
+    <div class="stat-box">
+      <div class="stat-title">Location</div>
+      <div class="stat-text">
+        Nepal
+      </div>
+    </div>
+
+    <div class="stat-box">
+      <div class="stat-title">Work</div>
+      <div class="stat-text">
+        Documentary Videos
+      </div>
+    </div>
+
+    <div class="stat-box">
+      <div class="stat-title">Focus</div>
+      <div class="stat-text">
+        Social & Travel Content
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+  © 2026 URAJS BLOG — URAJ SHRESTHA PORTFOLIO
+</footer>
+
+</body>
+</html>

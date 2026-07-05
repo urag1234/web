@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Urajs Videos</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* (UNCHANGED CSS — KEEPING YOUR DESIGN SAME) */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --yellow:#FFE000;
+  --black:#0A0A0A;
+  --white:#F5F5F0;
+  --gray:#171717;
+}
+
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Space Mono', monospace;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:70px;
+  padding:0 2rem;
+  background:var(--black);
+  border-bottom:2px solid var(--yellow);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  text-decoration:none;
+  font-family:'Bebas Neue', sans-serif;
+  font-size:2.5rem;
+  letter-spacing:4px;
+  color:var(--yellow);
+}
+
+.nav-links{
+  display:flex;
+  gap:8px;
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--white);
+  border:1px solid #2a2a2a;
+  padding:10px 18px;
+  font-size:0.72rem;
+  letter-spacing:2px;
+  transition:0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  background:var(--yellow);
+  color:var(--black);
+  border-color:var(--yellow);
+}
+
+/* HERO */
+.hero{
+  max-width:900px;
+  margin:auto;
+  min-height:calc(100vh - 70px);
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:flex-start;
+  padding:3rem 2rem;
+}
+
+/* BOX */
+.small-box{
+  width:220px;
+  background:var(--gray);
+  border:1px solid #222;
+  overflow:hidden;
+  position:relative;
+  transition:0.3s ease;
+  height:fit-content;
+}
+
+.small-box:hover{
+  transform:translateY(-4px);
+  border-color:var(--yellow);
+}
+
+/* HEADER */
+.box-header{
+  background:var(--yellow);
+  color:var(--black);
+  padding:10px 14px;
+  font-size:0.62rem;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+/* CONTENT */
+.box-content{
+  padding:0.8rem;
+}
+
+/* VIDEO */
+.video-wrapper{
+  position:relative;
+  width:100%;
+  height:120px;
+  margin-bottom:0.7rem;
+  overflow:hidden;
+  border:2px solid #2a2a2a;
+}
+
+.video-thumb{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:0.3s ease;
+}
+
+.small-box:hover .video-thumb{
+  filter:brightness(0.4);
+  transform:scale(1.05);
+}
+
+/* PLAY */
+.play-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  opacity:0;
+  transition:0.3s ease;
+
+  color:white;
+  font-size:0.75rem;
+  letter-spacing:2px;
+  text-shadow:0 0 10px white;
+}
+
+.small-box:hover .play-overlay{
+  opacity:1;
+}
+
+/* TITLE */
+.small-title{
+  font-family:'Bebas Neue', sans-serif;
+  font-size:1.2rem;
+  letter-spacing:2px;
+}
+
+/* TEXT */
+.small-text{
+  color:#BDBDBD;
+  line-height:1.6;
+  font-size:0.68rem;
+
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+
+  margin-top:0;
+
+  transition:all 0.3s ease;
+}
+
+.small-box:hover .small-text{
+  max-height:160px;
+  opacity:1;
+  margin-top:0.4rem;
+}
+
+/* FOOTER */
+footer{
+  border-top:1px solid #1a1a1a;
+  text-align:center;
+  padding:1.5rem;
+  color:#333;
+  font-size:0.65rem;
+  letter-spacing:2px;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+  nav{
+    padding:0 1rem;
+    flex-wrap:wrap;
+    gap:10px;
+    height:auto;
+    padding-top:1rem;
+    padding-bottom:1rem;
+  }
+
+  .logo{
+    font-size:1.8rem;
+  }
+
+  .nav-links{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .nav-links a{
+    padding:8px 12px;
+    font-size:0.6rem;
+  }
+
+  .hero{
+    padding:2rem 1rem;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html" class="logo">URAJS BLOG</a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">⌂ HOME</a></li>
+    <li><a href="videos.html" class="active">▶ VIDEOS</a></li>
+    <li><a href="info.html">◉ INFO</a></li>
+    <li><a href="forum.html">☰ MEMBER FORUM</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+
+  <!-- FEATURED VIDEO -->
+  <div class="small-box">
+
+    <div class="box-header">
+      FEATURED VIDEO
+    </div>
+
+    <div class="box-content">
+
+      <a href="https://youtu.be/R0VOOg66FtY?si=pfv7K53sI0hkJcy4" target="_blank">
+
+        <div class="video-wrapper">
+          <img 
+            src="https://img.youtube.com/vi/R0VOOg66FtY/hqdefault.jpg" 
+            class="video-thumb"
+          >
+          <div class="play-overlay">▶ PLAY NOW</div>
+        </div>
+
+      </a>
+
+      <div class="small-title">
+        OLD AGE HOME HEALTH CHECKUP
+      </div>
+
+      <div class="small-text">
+        On Mother’s Day, we organized a general health check-up program at an old age home.
+        We provided basic medical screening and care support for elderly mothers.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ILAM VIDEO FIXED -->
+  <div class="small-box">
+
+    <div class="box-header">
+      FEATURED VIDEO
+    </div>
+
+    <div class="box-content">
+
+      <a href="https://youtu.be/_YyBUr7OnnE?si=D1njH1qNXRPx6f3-" target="_blank">
+
+        <div class="video-wrapper">
+          <img 
+            src="https://img.youtube.com/vi/_YyBUr7OnnE/hqdefault.jpg" 
+            class="video-thumb"
+          >
+          <div class="play-overlay">▶ PLAY NOW</div>
+        </div>
+
+      </a>
+
+      <div class="small-title">
+        ILAM TEA GARDEN VISIT
+      </div>
+
+      <div class="small-text">
+        Travel and social work experiences from Ilam, Nepal.
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="small-box">
+
+    <div class="box-header">
+      FEATURED VIDEO
+    </div>
+
+    <div class="box-content">
+
+      <a href="https://youtu.be/oLqGSj4Kep8?si=uCHdGI0CPEERZdzk" target="_blank">
+
+        <div class="video-wrapper">
+          <img 
+            src="https://img.youtube.com/vi/oLqGSj4Kep8/hqdefault.jpg" 
+            class="video-thumb"
+          >
+          <div class="play-overlay">▶ PLAY NOW</div>
+        </div>
+
+      </a>
+
+      <div class="small-title">
+        ILAM SINGHABAHINI MANDIR HISTORY
+      </div>
+
+      <div class="small-text">
+        Discover the history, cultural importance, legends, and peaceful surroundings of Ilam Singhabahini Mandir in this documentary-style video exploring one of Ilam's respected religious landmarks.
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 URAJS BLOG — ALL RIGHTS RESERVED
+</footer>
+
+</body>
+</html>
